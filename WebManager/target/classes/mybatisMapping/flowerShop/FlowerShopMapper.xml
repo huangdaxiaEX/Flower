@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by xiaolingjia -->
+
+<mapper namespace="com.cqut.dao.flowerShopDao.FlowerShopDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.flowerShop.FlowerShop">
+		<![CDATA[   
+			select * from flowershop 
+		]]>
+		<where>
+			flowershopid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.flowerShop.FlowerShop">
+		<![CDATA[   
+			select * from flowershop 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct flowershopid) from flowershop
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from flowershop 
+        <where>
+        	flowershopid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from flowershop 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update flowershop set 
+				flowershopid = #{entity.flowerShopId},
+				shopname = #{entity.shopName},
+				shopphone = #{entity.shopPhone},
+				shopbossid = #{entity.shopBossId},
+				address = #{entity.address},
+				img = #{entity.img},
+				description = #{entity.description},
+				shopid = #{entity.shopId},
+				createtime = #{entity.createTime}
+      	]]>
+      	<where>
+      		flowershopid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update flowershop set 
+				flowershopid = #{entity.flowerShopId},
+				shopname = #{entity.shopName},
+				shopphone = #{entity.shopPhone},
+				shopbossid = #{entity.shopBossId},
+				address = #{entity.address},
+				img = #{entity.img},
+				description = #{entity.description},
+				shopid = #{entity.shopId},
+				createtime = #{entity.createTime}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update flowershop set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	flowershopid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update flowershop set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from flowershop   
+		]]>
+		<where>
+			flowershopid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from flowershop  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteFlowerShops" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 flowershopid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.flowerShop.FlowerShop">  
+     	<![CDATA[   
+        	 insert into flowershop (flowershopid, shopname, shopphone, shopbossid, address, img, description, shopid, createtime)
+        	 values (#{flowerShopId}, #{shopName}, #{shopPhone}, #{shopBossId}, #{address}, #{img}, #{description}, #{shopId}, #{createTime})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveFlowerShops"> 
+	 	 <![CDATA[  
+	    	insert into flowershop (flowershopid, shopname, shopphone, shopbossid, address, img, description, shopid, createtime) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.flowerShopId}, #{item.shopName}, #{item.shopPhone}, #{item.shopBossId}, #{item.address}, #{item.img}, #{item.description}, #{item.shopId}, #{item.createTime})
+	    </foreach> 
+	</insert> 
+	
+</mapper>

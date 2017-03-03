@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by xiaolingjia -->
+
+<mapper namespace="com.cqut.dao.flowerWordsDao.FlowerWordsDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.flowerWords.FlowerWords">
+		<![CDATA[   
+			select * from flowerwords 
+		]]>
+		<where>
+			flowerwordsid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.flowerWords.FlowerWords">
+		<![CDATA[   
+			select * from flowerwords 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct flowerwordsid) from flowerwords
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from flowerwords 
+        <where>
+        	flowerwordsid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from flowerwords 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update flowerwords set 
+				flowerwordsid = #{entity.flowerWordsId},
+				flowerid = #{entity.flowerId},
+				content = #{entity.content},
+				userid = #{entity.userId},
+				isshow = #{entity.isShow},
+				status = #{entity.status}
+      	]]>
+      	<where>
+      		flowerwordsid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update flowerwords set 
+				flowerwordsid = #{entity.flowerWordsId},
+				flowerid = #{entity.flowerId},
+				content = #{entity.content},
+				userid = #{entity.userId},
+				isshow = #{entity.isShow},
+				status = #{entity.status}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update flowerwords set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	flowerwordsid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update flowerwords set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from flowerwords   
+		]]>
+		<where>
+			flowerwordsid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from flowerwords  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteFlowerWordss" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 flowerwordsid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.flowerWords.FlowerWords">  
+     	<![CDATA[   
+        	 insert into flowerwords (flowerwordsid, flowerid, content, userid, isshow, status)
+        	 values (#{flowerWordsId}, #{flowerId}, #{content}, #{userId}, #{isShow}, #{status})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveFlowerWordss"> 
+	 	 <![CDATA[  
+	    	insert into flowerwords (flowerwordsid, flowerid, content, userid, isshow, status) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.flowerWordsId}, #{item.flowerId}, #{item.content}, #{item.userId}, #{item.isShow}, #{item.status})
+	    </foreach> 
+	</insert> 
+	
+</mapper>

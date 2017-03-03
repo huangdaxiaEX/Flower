@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by xiaolingjia -->
+
+<mapper namespace="com.cqut.dao.orderListDao.OrderListDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.orderList.OrderList">
+		<![CDATA[   
+			select * from orderlist 
+		]]>
+		<where>
+			orderlistid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.orderList.OrderList">
+		<![CDATA[   
+			select * from orderlist 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct orderlistid) from orderlist
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from orderlist 
+        <where>
+        	orderlistid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from orderlist 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update orderlist set 
+				orderlistid = #{entity.orderListId},
+				createtime = #{entity.createTime},
+				userid = #{entity.userId},
+				flowerid = #{entity.flowerId},
+				posttype = #{entity.postType},
+				postname = #{entity.postName},
+				buycount = #{entity.buyCount},
+				totalprice = #{entity.totalPrice},
+				poststatus = #{entity.postStatus},
+				buystatus = #{entity.buyStatus}
+      	]]>
+      	<where>
+      		orderlistid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update orderlist set 
+				orderlistid = #{entity.orderListId},
+				createtime = #{entity.createTime},
+				userid = #{entity.userId},
+				flowerid = #{entity.flowerId},
+				posttype = #{entity.postType},
+				postname = #{entity.postName},
+				buycount = #{entity.buyCount},
+				totalprice = #{entity.totalPrice},
+				poststatus = #{entity.postStatus},
+				buystatus = #{entity.buyStatus}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update orderlist set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	orderlistid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update orderlist set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from orderlist   
+		]]>
+		<where>
+			orderlistid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from orderlist  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteOrderLists" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 orderlistid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.orderList.OrderList">  
+     	<![CDATA[   
+        	 insert into orderlist (orderlistid, createtime, userid, flowerid, posttype, postname, buycount, totalprice, poststatus, buystatus)
+        	 values (#{orderListId}, #{createTime}, #{userId}, #{flowerId}, #{postType}, #{postName}, #{buyCount}, #{totalPrice}, #{postStatus}, #{buyStatus})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveOrderLists"> 
+	 	 <![CDATA[  
+	    	insert into orderlist (orderlistid, createtime, userid, flowerid, posttype, postname, buycount, totalprice, poststatus, buystatus) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.orderListId}, #{item.createTime}, #{item.userId}, #{item.flowerId}, #{item.postType}, #{item.postName}, #{item.buyCount}, #{item.totalPrice}, #{item.postStatus}, #{item.buyStatus})
+	    </foreach> 
+	</insert> 
+	
+</mapper>

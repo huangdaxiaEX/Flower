@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by xiaolingjia -->
+
+<mapper namespace="com.cqut.dao.userDao.UserDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.user.User">
+		<![CDATA[   
+			select * from user 
+		]]>
+		<where>
+			userid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.user.User">
+		<![CDATA[   
+			select * from user 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct userid) from user
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from user 
+        <where>
+        	userid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from user 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update user set 
+				userid = #{entity.userID},
+				username = #{entity.username},
+				password = #{entity.password},
+				age = #{entity.age},
+				address = #{entity.address},
+				phone = #{entity.phone},
+				nickname = #{entity.nickName},
+				usertype = #{entity.userType},
+				isavailable = #{entity.isAvailable},
+				code = #{entity.code},
+				description = #{entity.description}
+      	]]>
+      	<where>
+      		userid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update user set 
+				userid = #{entity.userID},
+				username = #{entity.username},
+				password = #{entity.password},
+				age = #{entity.age},
+				address = #{entity.address},
+				phone = #{entity.phone},
+				nickname = #{entity.nickName},
+				usertype = #{entity.userType},
+				isavailable = #{entity.isAvailable},
+				code = #{entity.code},
+				description = #{entity.description}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update user set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	userid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update user set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from user   
+		]]>
+		<where>
+			userid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from user  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteUsers" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 userid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.user.User">  
+     	<![CDATA[   
+        	 insert into user (userid, username, password, age, address, phone, nickname, usertype, isavailable, code, description)
+        	 values (#{userID}, #{username}, #{password}, #{age}, #{address}, #{phone}, #{nickName}, #{userType}, #{isAvailable}, #{code}, #{description})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveUsers"> 
+	 	 <![CDATA[  
+	    	insert into user (userid, username, password, age, address, phone, nickname, usertype, isavailable, code, description) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.userID}, #{item.username}, #{item.password}, #{item.age}, #{item.address}, #{item.phone}, #{item.nickName}, #{item.userType}, #{item.isAvailable}, #{item.code}, #{item.description})
+	    </foreach> 
+	</insert> 
+	
+</mapper>

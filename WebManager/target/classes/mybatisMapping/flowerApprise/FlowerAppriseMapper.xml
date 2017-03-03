@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by xiaolingjia -->
+
+<mapper namespace="com.cqut.dao.flowerAppriseDao.FlowerAppriseDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.flowerApprise.FlowerApprise">
+		<![CDATA[   
+			select * from flowerapprise 
+		]]>
+		<where>
+			flowerappriseid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.flowerApprise.FlowerApprise">
+		<![CDATA[   
+			select * from flowerapprise 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct flowerappriseid) from flowerapprise
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from flowerapprise 
+        <where>
+        	flowerappriseid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from flowerapprise 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update flowerapprise set 
+				flowerappriseid = #{entity.flowerAppriseId},
+				flowerid = #{entity.flowerId},
+				userid = #{entity.userId},
+				content = #{entity.content},
+				appriselevel = #{entity.appriseLevel}
+      	]]>
+      	<where>
+      		flowerappriseid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update flowerapprise set 
+				flowerappriseid = #{entity.flowerAppriseId},
+				flowerid = #{entity.flowerId},
+				userid = #{entity.userId},
+				content = #{entity.content},
+				appriselevel = #{entity.appriseLevel}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update flowerapprise set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	flowerappriseid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update flowerapprise set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from flowerapprise   
+		]]>
+		<where>
+			flowerappriseid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from flowerapprise  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteFlowerApprises" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 flowerappriseid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.flowerApprise.FlowerApprise">  
+     	<![CDATA[   
+        	 insert into flowerapprise (flowerappriseid, flowerid, userid, content, appriselevel)
+        	 values (#{flowerAppriseId}, #{flowerId}, #{userId}, #{content}, #{appriseLevel})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveFlowerApprises"> 
+	 	 <![CDATA[  
+	    	insert into flowerapprise (flowerappriseid, flowerid, userid, content, appriselevel) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.flowerAppriseId}, #{item.flowerId}, #{item.userId}, #{item.content}, #{item.appriseLevel})
+	    </foreach> 
+	</insert> 
+	
+</mapper>

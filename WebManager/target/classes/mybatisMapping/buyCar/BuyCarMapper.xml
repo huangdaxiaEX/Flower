@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by xiaolingjia -->
+
+<mapper namespace="com.cqut.dao.buyCarDao.BuyCarDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.buyCar.BuyCar">
+		<![CDATA[   
+			select * from buycar 
+		]]>
+		<where>
+			buycarid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.buyCar.BuyCar">
+		<![CDATA[   
+			select * from buycar 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct buycarid) from buycar
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from buycar 
+        <where>
+        	buycarid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from buycar 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update buycar set 
+				buycarid = #{entity.buyCarId},
+				flowerid = #{entity.flowerId},
+				userid = #{entity.userId},
+				status = #{entity.status}
+      	]]>
+      	<where>
+      		buycarid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update buycar set 
+				buycarid = #{entity.buyCarId},
+				flowerid = #{entity.flowerId},
+				userid = #{entity.userId},
+				status = #{entity.status}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update buycar set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	buycarid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update buycar set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from buycar   
+		]]>
+		<where>
+			buycarid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from buycar  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteBuyCars" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 buycarid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.buyCar.BuyCar">  
+     	<![CDATA[   
+        	 insert into buycar (buycarid, flowerid, userid, status)
+        	 values (#{buyCarId}, #{flowerId}, #{userId}, #{status})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveBuyCars"> 
+	 	 <![CDATA[  
+	    	insert into buycar (buycarid, flowerid, userid, status) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.buyCarId}, #{item.flowerId}, #{item.userId}, #{item.status})
+	    </foreach> 
+	</insert> 
+	
+</mapper>
