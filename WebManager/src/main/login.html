@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Flower Shop</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<div id="wrap">
+
+    <div class="header">
+        <div class="logo"><a href="index.html"><img src="images/logo.gif" alt="" title="" border="0"/></a></div>
+        <div id="menu">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="cart.html">购物车</a></li>
+                <li><a href="details.html">详情</a></li>
+                <li><a href="login.html">登录</a></li>
+            </ul>
+            <form class="ser-form">
+                <input id="search_value" type="text" name="name" />
+                <input id="search_btn" type="button" value="查询" />
+            </form>
+        </div>
+
+
+    </div>
+
+
+    <div class="center_content">
+        <div class="left_content">
+            <div class="login" id="login">
+                <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" title=""/></span>登录
+                </div>
+                <div class="feat_prod_box_details">
+                    <div class="contact_form">
+                        <div class="form_subtitle">login into your account</div>
+                        <form name="register" id="form_login" >
+                            <div class="form_row">
+                                <label class="contact"><strong>Username:</strong></label>
+                                <input id='login_Username' type="text" class="contact_input"/>
+                            </div>
+                            <div class="form_row">
+                                <label class="contact"><strong>Password:</strong></label>
+                                <input id='login_Password' type="text" class="contact_input"/>
+                            </div>
+                            <div class="form_row">
+                                <input id='login_reg' class="register" value="注册"/>
+                                <input id='login_log' class="register" value="登录"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="loginsuc" id="login_suc" style="display: none">
+                <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" title=""/></span>登录成功
+                </div>
+                <div class="feat_prod_box_details">
+                    <div class="contact_form">
+                        <div class="form_subtitle">login success</div>
+                        <form name="register" action="#">
+                            <p class="login-suc-name">用户名 : <span id="login_suc_name"></span></p>
+                            <div class="form_row">
+                                <input id='login_suc_logout' class="register" value="退出"/>
+                                <input id='login_suc_change' class="register" value="修改账户"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="register" id="register" style="display: none">
+                <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" title=""/></span>注册
+                </div>
+                <div class="feat_prod_box_details">
+                    <div class="contact_form">
+                        <div class="form_subtitle">create new account</div>
+                        <form name="register" action="#">
+                            <div class="form_row">
+                                <label class="contact"><strong>Username:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+
+                            <div class="form_row">
+                                <label class="contact"><strong>Phone:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+                            <div class="form_row">
+                                <label class="contact"><strong>Password:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+
+                            <div class="form_row">
+                                <label class="contact"><strong>age:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+                            <div class="form_row">
+                                <label class="contact"><strong>nickName:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+
+                            <div class="form_row">
+                                <label class="contact"><strong>description:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+                            <div class="form_row">
+                                <input id="register_btn" class="register" value="注册"/>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="change-info" id="change_info" style="display: none">
+                <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" title=""/></span>修改账户信息
+                </div>
+                <div class="feat_prod_box_details">
+                    <div class="contact_form">
+                        <div class="form_subtitle">change account</div>
+                        <form name="register" action="#">
+                            <div class="form_row">
+                                <label class="contact"><strong>Username:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+
+                            <div class="form_row">
+                                <label class="contact"><strong>Phone:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+                            <div class="form_row">
+                                <label class="contact"><strong>Password:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+
+                            <div class="form_row">
+                                <label class="contact"><strong>age:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+                            <div class="form_row">
+                                <label class="contact"><strong>nickName:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+
+                            <div class="form_row">
+                                <label class="contact"><strong>description:</strong></label>
+                                <input type="text" class="contact_input"/>
+                            </div>
+                            <div class="form_row">
+                                <input  id='change_info_btn' class="register" value="修改"/>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!--end of left content-->
+
+        <div class="right_content">
+            <div class="languages_box">
+            </div>
+
+
+            <div class="cart">
+                <div class="title"><span class="title_icon"><img src="images/cart.gif" alt="" title=""/></span>我的购物车
+                </div>
+                <div class="home_cart_content">
+                    3 x items | <span class="red">总共: 100$</span>
+                </div>
+                <a href="cart.html" class="view_cart">查看</a>
+
+            </div>
+
+
+            <div class="title"><span class="title_icon"><img src="images/bullet3.gif" alt="" title=""/></span>About Our
+                Shop
+            </div>
+            <div class="about">
+                <p>
+                    <img src="images/about.gif" alt="" title="" class="right"/>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                </p>
+            </div>
+
+
+        </div><!--end of right content-->
+
+
+        <div class="clear"></div>
+    </div><!--end of center content-->
+
+
+    <div class="footer">
+        <div class="left_footer"><img src="images/footer_logo.gif" alt="" title=""/><br/> <a
+                href="http://www.cssmoban.com/" title="free templates">cssmoban.com</a></div>
+        <div class="right_footer">
+            <a href="#">home</a>
+            <a href="#">about us</a>
+            <a href="#">services</a>
+            <a href="#">privacy policy</a>
+            <a href="#">contact us</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/ejs.min.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+</body>
+</html>
