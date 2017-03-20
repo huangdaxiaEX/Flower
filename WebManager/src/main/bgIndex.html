@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/sweetalert.css" rel="stylesheet">
+    <script src="./js/jquery-2.1.0.min.js"></script>
+    <style>
+        .login-out {
+            margin-left: 60%;
+            font-size: 16px;
+            line-height: 50px;
+            color: #c9c9c9;
+        }
+        .main{
+            padding-top: 30px;
+        }
+        .row{
+            margin-bottom: 30px;
+        }
+        #banner_2 .panel-primary{
+            border-color: #0baf65;
+        }
+        #banner_2 .panel-primary>.panel-heading{
+            background-color: #0baf65;
+            border-color: #0baf65;
+        }
+
+        a{
+            color: rgba(17, 11, 4, 0.59);
+        }
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+            color: #0baf65;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse" role="navigation">
+
+</nav>
+
+<div class="container">
+    <div id="content">
+
+        <div id="my-tab-content" class="tab-content">
+
+            <div class="tab-pane active" id="banner_2">
+                <div  class="row ">
+                    <div class="jumbotron jumbotron-2">
+                        <div class="panel panel-primary panel-banner" id="banner$velocityCount">
+                            <div style="display: none" class="banner-id">$banner.id</div>
+                            <div class="panel-heading">$banner.id</div>
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="media-left media-middle">
+                                        <a href="#">
+                                            <img class="media-object banner-img" src="$banner.image" alt="看到我就出问题了吧" width="200">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">标题</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control banner-title" placeholder="填写标题" value="$banner.title">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">副标题</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control banner-subtitle" placeholder="填写副标题" value="$banner.subtitle">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">名称</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control banner-name" placeholder="填写名称" value="$banner.name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">链接</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control banner-link" placeholder="填写链接" value="$banner.url">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">排序</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control banner-ranking" placeholder="填写排序" value="$banner.ranking">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">点击数</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control banner-hits" placeholder="点击数" value="$banner.hits">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">描述</label>
+                                                <div class="col-sm-10">
+                                                    <textarea  class="form-control banner-description" rows="5" cols="40" placeholder="填写描述"  value="$banner.description"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">上传图片</label>
+                                                <div class="col-sm-10">
+                                                    <input type="file" class="file-to-upload">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" #if($banner.active==1) checked #end class="isDisplay"> 是否显示
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <select class="select-id">
+                                                        <option #if($banner.pid==1) selected="selected" #end >1</option>
+                                                        <option #if($banner.pid==2) selected="selected" #end >2</option>
+                                                    </select> &nbsp;&nbsp;类型
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="button" class="btn btn-success btn-change">修 改</button>
+                                                    <button type="button" class="btn btn-danger btn-delete">删 除</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4">
+                                <button type="button" class="btn btn-primary btn-lg btn-add" style="margin: auto;display: block">新 增</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+        });
+    </script>
+</div> <!-- container -->
+
+<div class="loading">
+    <div class="loader8"></div>
+</div>
+
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/sweetalert.min.js"></script>
+<script src="./js/tales.js"></script>
+
+</body>
+</html>

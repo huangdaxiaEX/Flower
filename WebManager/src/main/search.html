@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Flower Shop</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+</head>
+<body>
+<div id="wrap">
+
+    <div class="header">
+        <div class="logo"><a href="index2.html"><img src="images/logo.gif" alt="" title="" border="0"/></a></div>
+        <div id="menu">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="cart.html">购物车</a></li>
+                <li><a href="details.html">详情</a></li>
+                <li><a href="login.html">登录</a></li>
+            </ul>
+            <form class="ser-form">
+                <input id="search_value" type="text" name="name" />
+                <input id="search_btn" type="button" value="查询" />
+            </form>
+        </div>
+    </div>
+
+
+    <div class="center_content">
+        <div class="left_content">
+            <div class="crumb_nav">
+                <a href="index2.html">home</a> &gt;&gt; category name
+            </div>
+            <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" title=""/></span>Category
+                products
+            </div>
+            <div class="new_products" id="product_tpl"></div>
+            <div class="clear"></div>
+        </div><!--end of left content-->
+
+        <div class="right_content">
+            <div class="languages_box">
+            </div>
+
+
+            <div class="cart">
+                <div class="title"><span class="title_icon"><img src="images/cart.gif" alt="" title=""/></span>我的购物车
+                </div>
+                <div class="home_cart_content">
+                    3 x items | <span class="red">总共: 100$</span>
+                </div>
+                <a href="cart.html" class="view_cart">查看</a>
+
+            </div>
+
+
+            <div class="title"><span class="title_icon"><img src="images/bullet3.gif" alt="" title=""/></span>About Our
+                Shop
+            </div>
+            <div class="about">
+                <p>
+                    <img src="images/about.gif" alt="" title="" class="right"/>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+                </p>
+            </div>
+
+
+        </div><!--end of right content-->
+
+
+        <div class="clear"></div>
+    </div><!--end of center content-->
+
+
+    <div class="footer">
+        <div class="left_footer"><img src="images/footer_logo.gif" alt="" title=""/><br/> <a
+                href="http://www.cssmoban.com/" title="free templates">cssmoban.com</a></div>
+        <div class="right_footer">
+            <a href="#">home</a>
+            <a href="#">about us</a>
+            <a href="#">services</a>
+            <a href="#">privacy policy</a>
+            <a href="#">contact us</a>
+        </div>
+    </div>
+
+
+</div>
+
+<script id="product" type="text/template">
+    <%for(var i=0;i<data.length;i++){%>
+    <%item = data[i]%>
+    <div class="new_prod_box">
+        <div class="new_prod_bg">
+            <a href="details.html"><img src="<%=item.img%>" alt="" title="" class="thumb" border="0"/></a>
+        </div>
+        <a href="details.html"><%=item.flowerName%></a>
+        <p><span>价格<%=item.price%>$</span></p>
+        <p><span>剩余:<%=item.lessCount%>/</span><span>总量:<%=item.totalCount%></span></p>
+    </div>
+    <%}%>
+</script>
+
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/ejs.min.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+    (function () {
+        (function () {
+            init();
+        })();
+
+        function init(){
+            var url2obj = utils.url2obj(document.URL);
+            var product_tpl = $("#product").html();
+            utils.ajax({
+                url:'flowerController/getFlowerByName',
+                post_data:{
+                    "flowerName":url2obj.search_value
+                },
+                success: function (data) {
+                    var tpl = ejs.render(product_tpl,{data:data});
+                    $('#tpl').html(tpl);
+                },
+                error: function () {
+                    t_data =  [
+                        {
+                            "flowerId":"鲜花id",
+                            "flowerName":"鲜花名称",
+                            "price":"88",
+                            "flowerType":"鲜花类型",
+                            "totalCount":"999",
+                            "lessCount":"12",
+                            "img":"images/thumb1.gif" ,
+                            "description":"说明",
+                            "shopIds":"商店 id",
+                            "content":"内容"
+                        },
+                        {
+                            "flowerId":"鲜花id",
+                            "flowerName":"鲜花名称",
+                            "price":"88",
+                            "flowerType":"鲜花类型",
+                            "totalCount":"777",
+                            "lessCount":"12",
+                            "img":"images/thumb1.gif" ,
+                            "description":"说明",
+                            "shopIds":"商店 id",
+                            "content":"内容"
+                        }
+                    ];
+                    var tpl = ejs.render(product_tpl,{data:t_data});
+                    $('#product_tpl').html(tpl);
+                }
+
+            });
+        }
+    })()
+</script>
+
+</body>
+</html>
