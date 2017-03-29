@@ -176,7 +176,24 @@ span.title_icon {
     padding: 5px 0 0 15px;
     font-size: 13px;
 }
-
+.box_center p{
+    margin-left: 20px;
+}
+.add-cart{
+    width: 80px;
+    height: 25px;
+    background: #a81f22;
+    float: right;
+    color: #FFFFFF;
+    line-height: 25px;
+    font-size: 14px;
+    border-radius: 3px;
+    margin-right: 20px;
+    text-align: center;
+}
+.add-cart:hover{
+    cursor: pointer;
+}
 a.more {
     font-style: italic;
     color: #a81f22;
@@ -223,6 +240,10 @@ img.right {
     padding: 0 5px 0 0;
     text-align: center;
 }
+.prod_img img{
+    width: 150px;
+    height: 150px;
+}
 
 .prod_det_box {
     width: 295px;
@@ -256,7 +277,7 @@ img.right {
 }
 
 .new_prod_box a {
-    padding: 5px 0 5px 0;
+    /*padding: 5px 0 5px 0;*/
     /*color:#b5b5b6;*/
     text-decoration: none;
     display: block;
@@ -273,7 +294,13 @@ img.right {
     background: url(../images/new_prod_box.gif) no-repeat center;
     position: relative;
 }
-
+.new_prod_bg img{
+    width: 132px;
+    height: 119px;
+}
+.new_prod_box .flowerName{
+  margin-top: 10px;
+}
 .new_icon {
     position: absolute;
     top: 0px;
@@ -289,9 +316,9 @@ img.right {
     z-index: 250;
 }
 
-img.thumb {
-    padding: 10px 0 0 0;
-}
+/*img.thumb {*/
+    /*padding: 10px 0 0 0;*/
+/*}*/
 
 .new_products {
     clear: both;
@@ -706,4 +733,12 @@ div.pagination span.disabled {
         opacity: 0;
         transform: translate(0,0);
     }
+}
+
+/* cart.html
+--------------------------------------*/
+
+.cart_img{
+    width: 100px;
+    height: 100px;
 }

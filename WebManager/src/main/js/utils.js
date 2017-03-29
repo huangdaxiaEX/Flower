@@ -14,7 +14,11 @@
             }
         })
     }
-    Utils.prototype.ajax = function(obj){
+    Utils.prototype.comStr = {
+        'host':'http://192.168.1.232:9999/WebManager',
+        'hostUrl':'http://192.168.1.232:9999/'
+    };
+    Utils.prototype.ajaxP = function(obj){
         $.ajax({
             type: 'post',
             url: obj.url,
@@ -22,8 +26,29 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function(data){
+                if(data.status == 200){
+                    return obj.success(data);
+                }else{
+                    //alert("网络出差啦！");
+                    obj.error();
+                }
+            },
+            error: function(err){
+                //alert("网络出差啦！");
+                obj.error(err);
+            }
+        });
 
-                if(data.Status == 200){
+        return obj;
+    };
+    Utils.prototype.ajaxG = function(obj){
+        $.ajax({
+            type: 'GET',
+            url: obj.url,
+            data:obj.post_data,
+            dataType: 'json',
+            success: function(data){
+                if(data.status == 200){
                     return obj.success(data);
                 }else{
                     //alert("网络出差啦！");
